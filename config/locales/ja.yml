@@ -1,0 +1,28 @@
+ja:
+  activerecord:
+    erros:
+      messages:
+        record_invalid: "バリデーションに失敗しました: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "%{record}が存在しているので削除できません"
+          has_many: "%{record}が存在しているので削除できません"
+    models:
+      user: ユーザー
+    attributes:
+      user:
+        name: 名前
+        email: メール
+        password: パスワード
+      trip: 旅行
+    attributes:
+      trip:
+        title: タイトル
+        started_at: 出発日
+        finished_at: 帰宅日
+      schedule: スケジュール
+    attributes:
+      schedule:
+        event: イベント
+        departure_time: 出発時間
+        arrival_time: 到着時間
+      

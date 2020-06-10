@@ -16,7 +16,7 @@ before_action :correct_user, only: [:edit,:update,:destroy]
             flash[:success] = '登録しました。'
         else
             render :new
-            flash[:danger] = '登録に失敗しました。'
+            flash.now[:danger] = '登録に失敗しました。'
         end
     end
 
@@ -32,7 +32,7 @@ before_action :correct_user, only: [:edit,:update,:destroy]
             flash[:success] = '更新しました。'
         else
             render :edit
-            flash[:danger] = '登録に失敗しました。'
+            flash.now[:danger] = '登録に失敗しました。'
         end
     end
 

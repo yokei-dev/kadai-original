@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
- 
+before_action :require_user_logged_in
   
   def index
     @users = User.all.order(id: :desc).page(params[:page]).per(10)
@@ -19,12 +19,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      session[:user_id] = @user.id
-      redirect_to root_path
+      redirect_to login_path
       flash[:success] = 'ユーザー登録をしました。'
     else
       render :new
-      flash[:danger] = 'ユーザー登録に失敗しました。'
+      flash.now[:danger] = 'ユーザー登録に失敗しました。'
     end
   end
 
@@ -39,7 +38,7 @@ class UsersController < ApplicationController
       flash[:success] = 'ユーザーを更新しました。'
     else
       render :edit
-      flash[:danger] = 'ユーザー更新に失敗しました。'
+      flash.now[:danger] = 'ユーザー更新に失敗しました。'
     end
   end
   

@@ -2,7 +2,8 @@
     <div class="col-sm-6 offset-sm-3">
         
         <%= form_with(model: schedule, local: true, multipart: true) do |f| %>
-        
+            <%= render 'layouts/error_messages', model: f.object %>
+            
             <div class="form-group">
                 <%= f.label :event, 'イベント' %>
                 <%= f.text_field :event, class: 'form-control' %>
