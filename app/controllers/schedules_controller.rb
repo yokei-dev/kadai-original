@@ -1,5 +1,8 @@
 class SchedulesController < ApplicationController
 
+before_action :require_user_logged_in
+before_action :correct_user, only: [:edit,:update,:destroy]
+
     def new
         @trip = current_user.trips.find(params[:id])
         @schedule = @trip.schedules.new
@@ -44,6 +47,13 @@ class SchedulesController < ApplicationController
         
     def schudule_params
         params.require(:schedule).permit(:event,:date,:departure_time,:departure_place,:arrival_time,:arrival_place,:price)
+    end
+    
+    def correct_user
+        @schedule = Schedule.find_by(id: params[:id])
+        unless @schedule
+            redirect_to root_path
+        end
     end
     
 end

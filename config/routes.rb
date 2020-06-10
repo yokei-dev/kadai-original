@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   root to: 'home#top'
   
   get 'login', to: 'sessions#new'
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
     member do
       get :followings
       get :followers
+      get :likes
     end
   end
   
@@ -22,5 +24,5 @@ Rails.application.routes.draw do
   end
 
   resources :relationships, only: [:create, :destroy]
-
+  resources :likes, only: [:create, :destroy]
 end

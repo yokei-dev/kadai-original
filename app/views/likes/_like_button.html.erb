@@ -1,0 +1,13 @@
+<% unless current_user == trip.user %>
+    <% if current_user.like?(trip) %>
+        <%= form_with(model: current_user.likes.find_by(trip_id: trip.id), local: true, method: :delete) do |f| %>
+            <%= hidden_field_tag :trip_id, trip.id %>
+            <%= f.submit 'unlike', class: 'btn btn-danger' %>
+        <% end %>
+    <% else %>
+        <%= form_with(model: current_user.likes.build, local: true) do |f| %>
+            <%= hidden_field_tag :trip_id, trip.id %>
+            <%= f.submit 'like', class: 'btn btn-primary' %>
+        <% end %>
+    <% end %>
+<% end %>

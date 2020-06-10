@@ -1,6 +1,8 @@
 class TripsController < ApplicationController
   
-
+before_action :require_user_logged_in
+before_action :correct_user, only: [:edit,:update,:destroy]
+  
   def show
     @trip = Trip.find_by(id: params[:id])
   end
@@ -16,7 +18,7 @@ class TripsController < ApplicationController
         image = params[:trip][:image]
         File.binwrite("public/trip_images/#{@trip.image_name}",image.read)
       else
-        @trip.image_name = "defalut.png"
+        @trip.image_name = "default.png"
       end
     if @trip.save
       redirect_to current_user
@@ -39,7 +41,7 @@ class TripsController < ApplicationController
         image = params[:trip][:image]
         File.binwrite("public/trip_images/#{@trip.image_name}",image.read)
       else
-        @trip.image_name = "defalut.png"
+        @trip.image_name = "default.png"
       end
       if @trip.save
         redirect_to current_user
@@ -65,5 +67,12 @@ class TripsController < ApplicationController
   end
   
   
+  
+  def correct_user
+    @trip = current_user.trips.find_by(id: params[:id])
+    unless @trip
+      redirect_to root_path
+    end
+  end
   
 end

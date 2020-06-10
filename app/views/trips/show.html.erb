@@ -17,7 +17,7 @@
         <% end %>
     </div>
     <!--予定の繰り返し-->
-    <% @trip.schedules.order(departure_time: :asc).each do |schedule| %>
+    <% @trip.schedules.order(date: :asc,departure_time: :asc).each do |schedule| %>
     <div class="col-3">
         <h1><%= schedule.date %></h1>
     </div>

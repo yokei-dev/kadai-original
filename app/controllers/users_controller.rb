@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  before_action :require_user_logged_in, only: [:index, :show]
+ 
   
   def index
     @users = User.all.order(id: :desc).page(params[:page]).per(10)
@@ -62,8 +62,14 @@ class UsersController < ApplicationController
     counts(@user)
   end
   
-  
-  
+  def likes
+    @user = User.find(params[:id])
+    @like_trips = @user.like_trips.page(params[:page])
+    counts(@user)
+  end  
+    
+    
+    
   private
   
   

@@ -1,18 +1,20 @@
 <% if users.any? %>
     <ul>
         <% users.each do |user| %>
-            <li class="media">
-                <img class="mr-2 rounded" src="<%=gravatar_url(user,{size: 50})%>" alt="">
-                <div class="media-body">
-                    <div>
-                        <%= user.name %>
+            <div class="mb-3">
+                <li class="media">
+                    <img class="mr-2 rounded" src="<%=gravatar_url(user,{size: 50})%>" alt="">
+                    <div class="media-body">
+                        <div>
+                            <%= user.name %>
+                        </div>
+                        <div>
+                            <p><%= link_to 'プロフィールを見る', user_path(user) %></p>
+                        </div>
                     </div>
-                    <div>
-                        <p><%= link_to 'プロフィールを見る', user_path(user) %></p>
-                    </div>
-                </div>
-            </li>
-            <%= render 'relationships/follow_button', user: user %>
+                </li>
+                <%= render 'relationships/follow_button', user: user %>
+            </div>
         <% end %>
     </ul>
     <%= paginate users %>

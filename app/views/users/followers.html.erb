@@ -7,13 +7,15 @@
     </div>
 </div>
 <div class="row">
-    <%= link_to '新規投稿', new_trip_path, class: 'btn btn-primary btn-block col-sm-3 mb-3 mx-auto' %>
+    <% if current_user == @user %>
+        <%= link_to '新規投稿', new_trip_path, class: 'btn btn-primary btn-block col-sm-3 mb-3 mx-auto' %>
+    <% end %>
     <div class="col-sm-11 offset-1">
         <ul class="nav nav-tabs nav-justified mb-3">
             <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">旅行予定<span class="badge badge-secondary"><%= @count_trips %></span></a></li>
             <li class="nav-item"><a href="<%= followings_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followings_user_path(@user)) %>">フォロー<span class="badge badge-secondary"><%= @count_followings %></span></a></li>
             <li class="nav-item"><a href="<%= followers_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followers_user_path(@user)) %>">フォロワー<span class="badge badge-secondary"><%= @count_followers %></span></a></li>
-            <li class="nav-item"><a href="#" class="nav-link">いいね</a></li>
+            <li class="nav-item"><a href="<%= likes_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(likes_user_path(@user)) %>">いいね<span class="badge badge-secondary"><%= @count_likes %></span></a></li>
         </ul>
         
     </div>
