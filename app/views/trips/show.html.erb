@@ -12,7 +12,9 @@
     </div>
     <div class="col-8">
         <%= link_to '戻る', "/users/#{@trip.user_id}", class: 'btn btn-primary' %>
+        <% if current_user == User.find(@trip.user_id) %>
         <%= link_to '予定追加', new_schedule_path, class: 'btn btn-primary' %>
+        <% end %>
     </div>
     <!--予定の繰り返し-->
     <% @trip.schedules.order(departure_time: :asc).each do |schedule| %>
@@ -38,8 +40,10 @@
                 <td class="text-center"><%= schedule.price%></td>
             </tr>
         </table>
+        <% if current_user == User.find(@trip.user_id) %>
         <%= link_to '編集', "/trips/#{@trip.id}/schedules/#{schedule.id}/edit", class:'btn btn-success mb-3'%>
         <%= link_to '削除', "/trips/#{@trip.id}/schedules/#{schedule.id}",method: :delete, class:'btn btn-danger mb-3'%>
+        <% end %>
     </div>
     <% end %>
 </div>

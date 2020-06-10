@@ -7,7 +7,9 @@
     </div>
 </div>
 <div class="row">
+    <% if current_user == @user %>
     <%= link_to '新規投稿', new_trip_path, class: 'btn btn-primary btn-block col-sm-3 mb-3 mx-auto' %>
+    <% end %>
     <div class="col-sm-11 offset-1">
         <ul class="nav nav-tabs nav-justified mb-3">
             <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">旅行予定<span class="badge badge-secondary"><%= @count_trips %></span></a></li>
