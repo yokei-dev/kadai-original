@@ -15,9 +15,9 @@
     </aside>
     <div class= "col-sm-8">
         <ul style = "list-style: none;">
-            <li><a href="#" class = "btn btn-secondary btn-block mt-3">旅行予定一覧</a></li>
-            <li><a href="#" class = "btn btn-secondary btn-block mt-3">フォロワー一覧</a></li>
-            <li><a href="#" class = "btn btn-secondary btn-block mt-3">フォロー一覧</a></li>
+            <li><a href="/trips" class = "btn btn-secondary btn-block mt-3">旅行予定一覧</a></li>
+            <li><a href="<%=followings_user_path(@user)%>" class = "btn btn-secondary btn-block mt-3">フォロー一覧</a></li>
+            <li><a href="<%=followers_user_path(@user)%>" class = "btn btn-secondary btn-block mt-3">フォロワー一覧</a></li>
             <li><a href="#" class = "btn btn-secondary btn-block mt-3">いいね一覧</a></li>
         </ul>
     </div>

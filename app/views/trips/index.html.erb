@@ -1,0 +1,32 @@
+<div class="row">
+    <%= link_to '新規投稿', new_trip_path, class: 'btn btn-primary btn-block col-sm-3' %>
+    <div class="col-sm-11 offset-1">
+        <ul class="nav nav-tabs nav-justified mb-3">
+            <li class="nav-item"><a href="/trips" class="nav-link">旅行予定一覧</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">フォロワー一覧</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">フォロー中一覧</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">いいね一覧</a></li>
+        </ul>
+        
+    </div>
+</div>
+
+<% if @trips.any? %>
+    <ul>
+        <% @trips.each do |trip| %>
+            <li class="media">
+                <img class="mr-2 rounded" src="<%="/trip_images/#{trip.image_name}"%>" alt="" width="200" height="200">
+                <div class="media-body">
+                    <div>
+                        <%= trip.title %>
+                    </div>
+                    <div>
+                        <p><%= link_to '予定の詳細を見る', trip_path(trip)%></p>
+                        <p><%= link_to '編集', edit_trip_path(trip), class: 'btn btn-success' %></p>
+                        <p><%= link_to '削除', trip, method: :delete, class: 'btn btn-danger' %></p>
+                    </div>
+                </div>
+            </li>
+        <% end %>
+    </ul>
+<% end %>

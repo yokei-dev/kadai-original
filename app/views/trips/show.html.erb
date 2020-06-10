@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-4">
+        <%= @trip.title %>
+         <li class="media">
+            <img class="mr-2 rounded" src="<%="/trip_images/#{@trip.image_name}"%>" alt="" width="200" height="200">
+            <div class="media-body">
+                <div>
+                    
+                </div>
+            </div>
+        </li>
+    </div>
+    <div class="col-8">
+        <%= link_to '予定追加', new_schedule_path, class: 'btn btn-primary' %>
+        <a href="#" class="btn btn-primary">持ち物リスト</a>
+    </div>
+    <!--予定の繰り返し-->
+    <% @trip.schedules.order(departure_time: :asc).each do |schedule| %>
+    <div class="col-3">
+        <h1><%= schedule.date %></h1>
+    </div>
+    <div class="col-9">
+        <table class="table table-bordered">
+            <tr>
+                <th class="text-center">出発場所/時間</th>
+                <td class="text-center"><%= schedule.departure_place %>/<%=schedule.departure_time%></td>
+            </tr>
+            <tr>
+                <th class="text-center">イベント</th>
+                <td class="text-center"><%= schedule.event%></td>
+            </tr>
+            <tr>
+                <th class="text-center">到着場所/時間</th>
+                <td class="text-center"><%= schedule.arrival_place %>/<%=schedule.arrival_time%></td>
+            </tr>
+            <tr>
+                <th class="text-center">費用</th>
+                <td class="text-center"><%= schedule.price%></td>
+            </tr>
+        </table>
+        <%= link_to '編集', "/trips/#{@trip.id}/schedules/#{schedule.id}/edit", class:'btn btn-success mb-3'%>
+        <%= link_to '削除', "/trips/#{@trip.id}/schedules/#{schedule.id}",method: :delete, class:'btn btn-danger mb-3'%>
+    </div>
+    <% end %>
+</div>
