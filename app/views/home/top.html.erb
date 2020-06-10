@@ -25,16 +25,38 @@
     </div>
 </div>
 <% else %>
-<h1>旅行の無駄を快適に</h1>
-<h1>NoWasteTrip</h1>
 
-<h3>予定を立てる</h3>
-<p>旅行ごとに綿密な予定を立てることができます。</p>
-<h3>日記をつける</h3>   
-<p>旅行ごとに日記をつけることができます。</p>
-<h3>予定を予定を参考にする</h3>
-<p>他の人の予定を参考にすることができます。</p>
-
-<%= link_to 'Signup', signup_path %>
-
+<div class="text-center mt-5 mb-5" style="background-color: #eee;">
+    <h1>旅行の無駄を快適に</h1>
+    <h1>NoWasteTrip</h1>
+</div>
+<div class="row mb-10 text-center">
+    <div class="card col-4">
+        <div class="card-header">
+            <h3>予定を立てる</h3>    
+        </div>
+        <div class="card-body">
+            <p>旅行ごとに綿密な予定を立てることができます。</p>
+        </div>
+    </div>
+    <div class="card col-4">
+        <div class="card-header">
+            <h3>日記をつける</h3>     
+        </div>
+        <div class="card-body">
+            <p>旅行ごとに日記をつけることができます。</p>    
+        </div>
+    </div>
+    <div class="card col-4">
+        <div class="card-header">
+            <h3>参考にする</h3>    
+        </div>
+        <div class="card-body">
+            <p>他の人の予定を参考にすることができます。</p>
+        </div>
+    </div>
+</div>
+<div class="mt-5 text-center">
+    <%= link_to 'Signup', signup_path, class: 'btn btn-primary'%>
+</div>
 <% end %>
