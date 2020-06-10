@@ -1,8 +1,5 @@
 class TripsController < ApplicationController
   
-  def index
-    @trips = current_user.trips.order(started_at: :desc)
-  end
 
   def show
     @trip = current_user.trips.find_by(id: params[:id])
@@ -15,14 +12,14 @@ class TripsController < ApplicationController
   def create
     @trip = current_user.trips.new(trip_params)
       if params[:trip][:image]
-        @trip.image_name = "#{@trip.id}.png"
+        @trip.image_name = "#{@trip.user_id}_#{@trip.title}.png"
         image = params[:trip][:image]
         File.binwrite("public/trip_images/#{@trip.image_name}",image.read)
       else
-        @trip.image_name = "defalut.jpg"
+        @trip.image_name = "defalut.png"
       end
     if @trip.save
-      redirect_to @trip
+      redirect_to current_user
       flash[:success] = '投稿しました。'
     else
       render :new
@@ -38,18 +35,18 @@ class TripsController < ApplicationController
     @trip = current_user.trips.find_by(id: params[:id])
     @trip.update(trip_params)
       if params[:trip][:image]
-        @trip.image_name = "#{@trip.id}.png"
+        @trip.image_name = "#{@trip.user_id}_#{@trip.title}.png"
         image = params[:trip][:image]
         File.binwrite("public/trip_images/#{@trip.image_name}",image.read)
       else
-        @trip.image_name = "defalut.jpg"
+        @trip.image_name = "defalut.png"
       end
       if @trip.save
-        redirect_to @trip
-        flash[:success] = '投稿しました。'
+        redirect_to current_user
+        flash[:success] = '更新しました。'
       else
         render :edit
-        flash[:danger] = '投稿に失敗しました。'
+        flash[:danger] = '更新に失敗しました。'
       end
   end
   
@@ -57,7 +54,7 @@ class TripsController < ApplicationController
   def destroy
     @trip = current_user.trips.find_by(id: params[:id])
     @trip.destroy
-    redirect_to trips_path
+    redirect_back(fallback_location: root_path)
     flash[:success] = '投稿を削除しました。'
   end
   

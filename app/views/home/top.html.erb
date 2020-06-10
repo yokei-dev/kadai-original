@@ -1,3 +1,30 @@
+
+<% if logged_in? %>
+<div class="row">
+    <aside class="col-sm-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title"><%= @user.name %></h3>
+            </div>
+            <div class="card_body">
+                <img class="rounded img-fluid" src="<%= gravatar_url(@user, {size:500}) %>" alt ="">
+            </div>
+            <ul>
+                <%=link_to '編集', edit_user_path(@user), class: 'btn btn-primary'%>
+                <%=link_to '退会', @user, method: :delete, data: {confirm: '本当に削除してよろしいですか?'}, class: 'btn btn-danger'%>
+            </ul>
+        </div>
+    </aside>
+    <div class= "col-sm-8">
+        <ul style = "list-style: none;">
+            <li><a href="<%= user_path(@user) %>" class = "btn btn-secondary btn-block mt-3">旅行予定</a></li>
+            <li><a href="<%=followings_user_path(@user)%>" class = "btn btn-secondary btn-block mt-3">フォロー</a></li>
+            <li><a href="<%=followers_user_path(@user)%>" class = "btn btn-secondary btn-block mt-3">フォロワー</a></li>
+            <li><a href="#" class = "btn btn-secondary btn-block mt-3">いいね一覧</a></li>
+        </ul>
+    </div>
+</div>
+<% else %>
 <h1>旅行の無駄を快適に</h1>
 <h1>NoWasteTrip</h1>
 
@@ -9,3 +36,5 @@
 <p>他の人の予定を参考にすることができます。</p>
 
 <%= link_to 'Signup', signup_path %>
+
+<% end %>

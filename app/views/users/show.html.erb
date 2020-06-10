@@ -1,24 +1,22 @@
-<div class="row">
-    <aside class="col-sm-4">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title"><%= @user.name %></h3>
-            </div>
-            <div class="card_body">
-                <img class="rounded img-fluid" src="<%= gravatar_url(@user, {size:500}) %>" alt ="">
-            </div>
-            <ul>
-                <%=link_to '編集', edit_user_path(@user), class: 'btn btn-primary'%>
-                <%=link_to '退会', @user, method: :delete, data: {confirm: '本当に削除してよろしいですか?'}, class: 'btn btn-danger'%>
-            </ul>
+ <div class="media mx-auto mb-3" style="width: 200px">
+    <img class="mr-2 rounded" src="<%=gravatar_url(@user,{size: 200})%>" alt="">
+    <div class="media-body">
+        <div>
+            <h3><%= @user.name %></h3>
         </div>
-    </aside>
-    <div class= "col-sm-8">
-        <ul style = "list-style: none;">
-            <li><a href="/trips" class = "btn btn-secondary btn-block mt-3">旅行予定一覧</a></li>
-            <li><a href="<%=followings_user_path(@user)%>" class = "btn btn-secondary btn-block mt-3">フォロー一覧</a></li>
-            <li><a href="<%=followers_user_path(@user)%>" class = "btn btn-secondary btn-block mt-3">フォロワー一覧</a></li>
-            <li><a href="#" class = "btn btn-secondary btn-block mt-3">いいね一覧</a></li>
-        </ul>
     </div>
 </div>
+<div class="row">
+    <%= link_to '新規投稿', new_trip_path, class: 'btn btn-primary btn-block col-sm-3 mb-3 mx-auto' %>
+    <div class="col-sm-11 offset-1">
+        <ul class="nav nav-tabs nav-justified mb-3">
+            <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">旅行予定<span class="badge badge-secondary"><%= @count_trips %></span></a></li>
+            <li class="nav-item"><a href="<%= followings_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followings_user_path(@user)) %>">フォロー<span class="badge badge-secondary"><%= @count_followings %></span></a></li>
+            <li class="nav-item"><a href="<%= followers_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followers_user_path(@user)) %>">フォロワー<span class="badge badge-secondary"><%= @count_followers %></span></a></li>
+            <li class="nav-item"><a href="#" class="nav-link">いいね</a></li>
+        </ul>
+        
+    </div>
+</div>
+
+<%= render 'trips/trips', trips: @trips %>

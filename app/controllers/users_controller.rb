@@ -8,6 +8,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @trips = @user.trips.order(id: :desc).page(params[:page])
+    counts(@user)
   end
 
   def new
@@ -18,7 +20,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to @user
+      redirect_to root_path
       flash[:success] = 'ユーザー登録をしました。'
     else
       render :new
@@ -33,7 +35,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to @user
+      redirect_to root_path
       flash[:success] = 'ユーザーを更新しました。'
     else
       render :edit

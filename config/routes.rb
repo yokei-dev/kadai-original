@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :trips do 
+  resources :trips, except: [:index] do 
     member do
       resources :schedules, only: [:new, :create, :edit, :update, :destroy]
     end
