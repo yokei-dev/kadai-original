@@ -12,11 +12,11 @@ before_action :correct_user, only: [:edit,:update,:destroy]
         @trip = current_user.trips.find(params[:id])
         @schedule = @trip.schedules.new(schudule_params)
         if @schedule.save
-            redirect_to @trip
             flash[:success] = '登録しました。'
+            redirect_to @trip
         else
-            render :new
             flash.now[:danger] = '登録に失敗しました。'
+            render :new
         end
     end
 
@@ -28,11 +28,11 @@ before_action :correct_user, only: [:edit,:update,:destroy]
         @schedule = Schedule.find(params[:id])
         if @schedule.update(schudule_params)
             @trip = Trip.find(@schedule.trip_id)
-            redirect_to @trip
             flash[:success] = '更新しました。'
+            redirect_to @trip
         else
+            flash.now[:danger] = '更新に失敗しました。'
             render :edit
-            flash.now[:danger] = '登録に失敗しました。'
         end
     end
 

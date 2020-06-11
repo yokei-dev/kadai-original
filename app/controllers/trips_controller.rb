@@ -21,11 +21,11 @@ before_action :correct_user, only: [:edit,:update,:destroy]
         @trip.image_name = "default.png"
       end
     if @trip.save
-      redirect_to current_user
       flash[:success] = '投稿しました。'
+      redirect_to current_user
     else
-      render :new
       flash.now[:danger] = '投稿に失敗しました。'
+      render :new
     end
   end
 
@@ -44,11 +44,11 @@ before_action :correct_user, only: [:edit,:update,:destroy]
         @trip.image_name = "default.png"
       end
       if @trip.save
-        redirect_to current_user
         flash[:success] = '更新しました。'
+        redirect_to current_user
       else
-        render :edit
         flash.now[:danger] = '更新に失敗しました。'
+        render :edit
       end
   end
   

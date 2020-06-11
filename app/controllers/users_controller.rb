@@ -19,11 +19,11 @@ before_action :require_user_logged_in, only: [:index, :show, :edit,:update,:dest
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to login_path
       flash[:success] = 'ユーザー登録をしました。'
+      redirect_to login_path
     else
-      render :new
       flash.now[:danger] = 'ユーザー登録に失敗しました。'
+      render :new
     end
   end
 
@@ -34,11 +34,11 @@ before_action :require_user_logged_in, only: [:index, :show, :edit,:update,:dest
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to root_path
       flash[:success] = 'ユーザーを更新しました。'
+      redirect_to root_path
     else
-      render :edit
       flash.now[:danger] = 'ユーザー更新に失敗しました。'
+      render :edit
     end
   end
   

@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-4">
+    <div class="col-sm-4">
         <h3><%= @trip.title %></h3>
          <li class="media">
             <img class="mr-2 rounded" src="<%="/trip_images/#{@trip.image_name}"%>" alt="" width="150" height="150">
@@ -10,7 +10,7 @@
             </div>
         </li>
     </div>
-    <div class="col-8">
+    <div class="col-sm-8 mt-3">
         <%= link_to '戻る', "/users/#{@trip.user_id}", class: 'btn btn-primary' %>
         <% if current_user == User.find(@trip.user_id) %>
         <%= link_to '予定追加', new_schedule_path, class: 'btn btn-primary' %>
@@ -18,10 +18,10 @@
     </div>
     <!--予定の繰り返し-->
     <% @trip.schedules.order(date: :asc,departure_time: :asc).each do |schedule| %>
-    <div class="col-3">
+    <div class="col-sm-4">
         <h1><%= schedule.date %></h1>
     </div>
-    <div class="col-9">
+    <div class="col-sm-8">
         <table class="table table-bordered">
             <tr>
                 <th class="text-center">出発場所/時間</th>
